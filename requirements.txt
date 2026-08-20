@@ -1,0 +1,8 @@
+beautifulsoup4
+requests
+pyfiglet
+streamlit
+aiohttp
+pandas
+openpyxl
+aiodns
