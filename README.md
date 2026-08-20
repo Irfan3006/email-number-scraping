@@ -1,87 +1,87 @@
-# SIBRA Unified Email & Indonesian Phone Scraper (v2.0)
+# SIBRA Unified Email and Indonesian Phone Scraper (v2.0)
 
-A high-performance, asynchronous web scraper that extracts and validates **Emails** and **Indonesian Phone / WhatsApp Numbers** simultaneously in a **single crawl pass** (*sekali jalan*).
+An asynchronous web scraping engine that extracts and validates email addresses and Indonesian telephone or WhatsApp numbers concurrently in a single crawl pass.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-1. **Single-Pass Extraction (Sekali Jalan)**:
-   - Crawls each web page once and simultaneously extracts verified emails and phone numbers.
-   - Saves 50%+ bandwidth and crawling time compared to running separate tools.
+1. **Single-Pass Concurrent Extraction**:
+   - Crawls target pages once to extract validated email addresses and telephone numbers simultaneously.
+   - Reduces network bandwidth consumption and crawl time.
 2. **Correlated Lead Generation**:
-   - Matches and groups all contact information (Emails + Phone numbers) discovered per domain / URL.
-3. **Advanced Email Validation**:
-   - Strict anti-false-positive regex filtering out web assets (`.png`, `.js`, `.css`, etc.).
-   - Blacklist filter for common placeholder and repository domains/emails.
-   - De-obfuscation for protected emails (e.g. `user [at] company [dot] com` -> `user@company.com`).
-4. **Indonesian Telecom & WhatsApp Validation**:
-   - Recognizes Indonesian mobile operators: **Telkomsel** (Halo, SimPATI, AS, By.U), **Indosat Ooredoo** (IM3, Matrix, Mentari), **XL Axiata**, **Axis**, **Tri (3)**, and **Smartfren**.
-   - Recognizes **PSTN Landlines** across Indonesian area codes (021 Jabodetabek, 022 Bandung, 031 Surabaya, 061 Medan, 0361 Bali, etc.).
-   - Automatically generates international E.164 formatting (`+628...`) and direct **WhatsApp click-to-chat links** (`https://wa.me/628...`).
-   - Extracts from HTML `<a>` tags (`tel:`, `wa.me/`, `api.whatsapp.com`), `data-*` attributes, and plain text.
-5. **Search Engine Lead Gen (Bing, Yahoo, DuckDuckGo)**:
-   - Enter keyword queries (e.g. *"digital marketing agency in jakarta"*, *"klinik kecantikan surabaya"*) to automatically discover and crawl lead websites.
-6. **Modern Streamlit Dashboard (Dark & Light Theme)**:
-   - Real-time live crawling logs and 5 live metrics.
-   - Filterable & searchable interactive tables.
-   - **Multi-Sheet Excel (`.xlsx`) Export** (Sheet 1: Combined Leads, Sheet 2: Emails, Sheet 3: Phone Numbers), individual CSVs, and JSON.
-7. **Console CLI Support**:
-   - Run directly in command line with interactive prompts or `--cli` flag.
+   - Aggregates and links all discovered contact records (emails, mobile numbers, and landlines) to their source domain and page URL.
+3. **Email Validation Engine**:
+   - Applies strict anti-false-positive filtering to exclude static web asset extensions (`.png`, `.js`, `.css`, `.svg`).
+   - Filters blacklisted domains, placeholder addresses, and generic service emails.
+   - De-obfuscates masked email formats (for example, `user [at] company [dot] com` into `user@company.com`).
+4. **Indonesian Telecom and WhatsApp Parsing**:
+   - Identifies major Indonesian mobile operators including Telkomsel (Halo, SimPATI, AS, By.U), Indosat Ooredoo (IM3, Matrix, Mentari), XL Axiata, Axis, Tri (3), and Smartfren.
+   - Identifies Indonesian PSTN landline area codes (such as 021 Jabodetabek, 022 Bandung, 031 Surabaya, 061 Medan, and 0361 Bali).
+   - Generates international standard E.164 formats (`+628...`) and direct WhatsApp click-to-chat links (`https://wa.me/628...`).
+   - Parses contact data from HTML anchors (`tel:`, `wa.me/`, `api.whatsapp.com`), `data-*` attributes, and raw document text.
+5. **Search Engine Discovery (Bing, Yahoo, DuckDuckGo)**:
+   - Queries search engines using industry keywords to automatically identify and crawl candidate business websites.
+6. **Streamlit Web Dashboard**:
+   - Displays real-time crawling logs and session metrics.
+   - Provides searchable, filterable data tables with theme support.
+   - Exports data to multi-sheet Microsoft Excel (`.xlsx`), CSV, and JSON files.
+7. **Command Line Interface (CLI)**:
+   - Supports batch operations and interactive single-target execution via terminal commands.
 
 ---
 
-## 🛠️ Installation
+## Installation
 
-1. **Clone or navigate to the project directory**:
+1. **Clone the repository and navigate to the directory**:
    ```bash
-   cd e:\File_IRFAN\CODE\scraping\email-nomor
+   git clone https://github.com/Irfan3006/email-number-scraping.git
+   cd email-number-scraping
    ```
 
-2. **Install required dependencies**:
+2. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
 ---
 
-## 🚀 How to Run
+## Execution Modes
 
-### Option 1: Streamlit Web UI (Recommended)
-Run the web dashboard directly:
+### 1. Streamlit Web Dashboard
+Launch the interactive web application:
 ```bash
 streamlit run app.py
 ```
-Pilih mode **Batch Company Target List (100 Focus Targets)** di sidebar untuk menjalankan scraping target 100 perusahaan secara visual.
 
-### Option 2: Batch Target Scraper (CLI Mode)
-Jalankan scraping otomatis untuk 100 target perusahaan:
+### 2. Batch Company Target Scraper (CLI)
+Execute automated discovery and contact extraction for company targets listed in `targets.txt`:
 ```bash
 python batch_scraper.py
 ```
-*Atau via launcher:*
+Alternatively, launch via the main CLI runner:
 ```bash
 python scraper.py --batch
 ```
-Hasil akan langsung disimpan bertahap ke `target_companies_leads.xlsx` dan `target_companies_leads.csv`.
+Results are incrementally exported to `target_companies_leads.xlsx` and `target_companies_leads.csv`.
 
-### Option 3: Single URL / Keyword Console CLI Mode
-Run in terminal mode:
+### 3. Single URL or Keyword Search (CLI)
+Run the interactive console scraper:
 ```bash
 python scraper.py --cli
 ```
 
 ---
 
-## 📊 Output Formats
+## Output Formats
 
 - **Multi-Sheet Excel (`.xlsx`)**:
-  - `Combined Leads`: Full profile per source URL (Emails, Phone Numbers, Domain, Timestamp).
-  - `Emails`: Validated Email list with Domain and Source URLs.
-  - `Phone Numbers`: E.164, National Format, Operator / Carrier, Type, WhatsApp Link, and Source URLs.
-- **CSV & JSON**: Instant downloads for individual datasets.
+  - `Combined Leads`: Consolidated contact profiles grouped by source URL (Emails, Phone Numbers, Domain, Timestamp).
+  - `Emails`: Validated email addresses, domain breakdown, and source URLs.
+  - `Phone Numbers`: Phone records with E.164, National Format, Operator, Type, WhatsApp Links, and source URLs.
+- **CSV and JSON**: Structured single-dataset exports for external database ingestion or spreadsheet analysis.
 
 ---
 
-## ⚖️ License
+## License
 MIT License
